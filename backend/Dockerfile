@@ -4,8 +4,8 @@ FROM golang:1.26-alpine AS builder
 WORKDIR /app
 
 # Copy dependency files first for better layer caching
-COPY go.mod go.sum ./
-RUN go mod download
+COPY go.mod ./
+RUN go mod tidy && go mod download
 
 # Copy source and build
 COPY . .
